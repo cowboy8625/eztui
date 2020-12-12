@@ -11,6 +11,6 @@ keywords = ["tui", "terminal", "dashboard", "cli", "color"]
 categories = ["Command line utilities"]
 
 [dependencies]
-buffy = { branch = "main", git = "https://github.com/cowboy8625/buffy" }
+buffy = "0.0.1" # { branch = "main", git = "https://github.com/cowboy8625/buffy" }
 crossterm = "0.18.2"
 
