@@ -1,0 +1,10 @@
+[package]
+name = "eztui"
+version = "0.1.0"
+authors = ["cowboy8625 <43012445+cowboy8625@users.noreply.github.com>"]
+edition = "2018"
+
+[dependencies]
+buffy = { branch = "main", git = "https://github.com/cowboy8625/buffy" }
+crossterm = "0.18.2"
+
