@@ -7,13 +7,14 @@
   <br>
 </h1>
 
-<h1 align="center">
-    ![lastupdated](https://img.shields.io/github/last-commit/cowboy8625/eztui)
-    ![GitHub repo size](https://img.shields.io/github/repo-size/cowboy8625/eztui)
-    ![issuse](https://img.shields.io/github/issues/cowboy8625/eztui)
-    ![Discord](https://img.shields.io/discord/509849754155614230)
-    ![Lines of Code](https://tokei.rs/b1/github/cowboy8625/eztui)
-</h1>
+<p align="center">
+  <a><img alt="lastupdated" src="https://img.shields.io/github/repo-size/cowboy8625/eztui"></a>
+  <a><img alt="GitHub repo size" src="https://img.shields.io/github/last-commit/cowboy8625/eztui"></a>
+  <a><img alt="GitHub repo size" src="https://img.shields.io/github/last-commit/cowboy8625/eztui"></a>
+  <a><img alt="issuse" src="https://img.shields.io/github/issues/cowboy8625/eztui"></a>
+  <a><img alt="Lines of Code" src="https://tokei.rs/b1/github/cowboy8625/eztui"></a>
+  <a href="https://discord.gg/KwnGX8P"><img alt="Discord Chat" src="https://img.shields.io/discord/509849754155614230"></a>
+</p>
 
 # What is eztui
 
