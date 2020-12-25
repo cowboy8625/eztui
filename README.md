@@ -1,17 +1,19 @@
 <h1 align="center">
   <br>
-  <img src="eztui_logo.png" alt="logo" width="200">
+  <img src="eztui_logo.png" alt="logo" width="400">
   <br>
   EZTUI
   <br>
   <br>
 </h1>
 
-![lastupdated](https://img.shields.io/github/last-commit/cowboy8625/eztui)
-![GitHub repo size](https://img.shields.io/github/repo-size/cowboy8625/eztui)
-![issuse](https://img.shields.io/github/issues/cowboy8625/eztui)
-![Discord](https://img.shields.io/discord/509849754155614230)
-![Lines of Code](https://tokei.rs/b1/github/cowboy8625/eztui)
+<h1 align="center">
+    ![lastupdated](https://img.shields.io/github/last-commit/cowboy8625/eztui)
+    ![GitHub repo size](https://img.shields.io/github/repo-size/cowboy8625/eztui)
+    ![issuse](https://img.shields.io/github/issues/cowboy8625/eztui)
+    ![Discord](https://img.shields.io/discord/509849754155614230)
+    ![Lines of Code](https://tokei.rs/b1/github/cowboy8625/eztui)
+</h1>
 
 # What is eztui
 
