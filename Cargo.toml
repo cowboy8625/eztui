@@ -11,10 +11,11 @@ keywords = ["tui", "terminal", "dashboard", "cli", "color"]
 categories = ["Command line utilities"]
 
 [dependencies]
-# buffy = {branch = "main", git = "https://github.com/cowboy8625/buffy.git", features = ["with_crossterm"] }
-buffy = { path = "../buffy", features = ["with_crossterm"] }
 crossterm = "0.18.2"
+itertools = "0.10.0"
 
 [workspace]
+members = [
+    "examples/*",
+]
 
-members = ["buffy"]

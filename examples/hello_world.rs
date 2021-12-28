@@ -1,13 +1,54 @@
-use std::io::{stdout, Write};
-use eztui::*;
+use eztui::{Application, Color /*,Settings, Result*/, Command, Element, Key, Keys, Text};
 
-fn main() {
-    let mut stdout = stdout();
-    let (width, height) = (40, 20);
-    let text = "Hello World";
-    let mut window = eztui::Window::new(10, 10, width, height);
-    window.set_background_color(Color::Rgb{r:0, g:139, b:139});
-    window.set_text(width/2-(text.len()as u16)/2, height/2, text, Color::Red, Color::Blue);
-    window.draw(&mut stdout);
-    stdout.flush().expect("This should flush");
+// #[derive(Debug)]
+// enum Message {
+//     NoOp,
+// }
+
+struct App {
+    is_running: bool,
+    keys_pressed: String,
+}
+
+impl Application for App {
+    // type Message = Message;
+
+    fn new() -> Self {
+        Self {
+            is_running: false,
+            keys_pressed: String::new(),
+        }
+    }
+    fn update(&mut self, keys: Keys) -> Command {
+        match keys {
+            Keys::Key(key) => {
+                match key {
+                    Key::Esc => self.is_running = true,
+                    _ => {}
+                }
+                self.keys_pressed = format!("KEY: {:?}", key);
+                return Command::ClearCurentLine;
+            }
+            Keys::KeyAndMod { key, modk } => {
+                match (key, modk) {
+                    (Key::LC, Key::Ctrl) => self.is_running = true,
+                    _ => {}
+                }
+                self.keys_pressed = format!("KEY: {:?} with Mod Key: {:?}", key, modk);
+                return Command::ClearCurentLine;
+            }
+        }
+    }
+    fn view(&mut self) -> Element /*<'_, Self::Message>*/ {
+        Text::new(&self.keys_pressed).with(Color::Cyan).into()
+    }
+
+    fn should_exit(&self) -> bool {
+        self.is_running
+    }
+}
+
+fn main() /*-> Result */
+{
+    App::run(/*Settings::default()*/)
 }

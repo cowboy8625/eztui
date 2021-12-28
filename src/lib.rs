@@ -1,90 +1,74 @@
-//TODO: Needs Key access
-//FIXME: Adding Color to the Cell's isnt working,   I may need to strip the ascii code or i may
-//need to Get background codes and not forground.  SetForegroundColor
-//
-//
-//On further inspection, i have seen that the SetBackgroundColor returns a color text reset so when
-//i show my text its like SetBackgroundColor -> color text reset my text
-//so it never shows the color, easy.
+mod application;
+mod column;
+mod command;
+mod element;
+mod key;
+mod row;
+mod text;
+mod text_input;
+mod widget;
+pub use application::Application;
+pub use column::Column;
+pub use command::Command;
+pub use crossterm::style::Color;
+pub use element::Element;
+pub use key::{Key, Keys};
+pub use row::Row;
+pub use text::Text;
+pub use text_input::TextInput;
+pub use widget::Widget;
 
-//! eztui is a crate to make UI in the terminal easier.  It is super early in development but I
-//! think eztui will not have a event loop and let the user create it.  Eztui will have
-//! Windows: (has a buffer with a width height and a location on screen, can not hold a
-//! window),
-//! Labels: (Not sure),
-//! Groups: (Will hold any strcut that has a Wiget trait.),
-//!
-pub use buffy::Color;
-use std::io::{Stdout, Write};
-use crossterm::{queue, terminal, cursor, style};
-use buffy::Buffer;
+#[cfg(test)]
+mod tests {
+    use super::*;
+    // #[test]
+    // fn application_trait() {
+    //     struct App;
+    //     impl Application for App {
+    //         fn update(&mut self) {}
+    //         fn view(&mut self) -> Element {
+    //             let row1 = Row::new()
+    //                 .push(Text::new("Row 1 Item 1"))
+    //                 .push(Text::new("Row 1 Item 2"));
+    //             let row2 = Row::new()
+    //                 .push(Text::new("Row 2 Item 1"))
+    //                 .push(Text::new("Row 2 Item 2"));
+    //             let column = Column::new().push(row1).push(row2);
+    //             column.into()
+    //         }
+    //     }
+    // }
+    #[test]
+    fn widget_to_element() {
+        let text: Element = Text::new("Text").into();
+        eprintln!("{:?}", text);
+        eprintln!("^ TEXT ^");
 
-/// Base group of methods.
-pub trait Wiget {
-    fn new(x: u16, y: u16, width: u16, height: u16) -> Self;
-    fn set_text(&mut self, x: u16, y: u16, text: &str, fg: buffy::Color, bg: buffy::Color);
-    fn set_background_color(&mut self, color: Color);
-    fn set_pos(&mut self, x: u16, y: u16);
-    fn set_size(&mut self, width: u16, height: u16);
-    fn draw(&mut self, stdout: &mut Stdout);
-}
-
-/// Group Widget's together in a Group
-pub struct Group {
-}
-
-/// Window holds a buffer 
-pub struct Window {
-    x: u16,
-    y: u16,
-    buffer: Buffer,
-}
-
-impl Wiget for Window {
-    fn new(x: u16, y: u16, width: u16, height: u16) -> Self {
-        Self {
-            x, y, buffer: buffy::Buffer::new(width as usize, height as usize, ' ', buffy::Color::White, buffy::Color::Black),
-        }
-    }
-
-    fn set_text(&mut self, x: u16, y: u16, text: &str, fg: buffy::Color, bg: buffy::Color) {
-        self.buffer.replace_line(x as usize, y as usize, text, fg, bg);
-    }
-
-    fn set_background_color(&mut self, color: Color) {
-        self.buffer.color.iter_mut().for_each(|(_, b)| *b = color);
-    }
-
-    fn set_pos(&mut self, x: u16, y: u16) {
-        self.x = x;
-        self.y = y;
-    }
-
-    /// Sets size of buffer.
-    fn set_size(&mut self, width: u16, height: u16) {
-        self.buffer.width = width as usize;
-        self.buffer.height = height as usize;
-    }
-
-    /// Drawing does not flush.
-    fn draw(&mut self, stdout: &mut Stdout) {
-        let (x, y) = (self.x, self.y);
-        for q in self.buffer.queue.drain(..) {
-            for (i, c) in q.cells.iter().enumerate() {
-                queue!(
-                    stdout,
-                    cursor::MoveTo(x + q.x + i as u16, y + q.y),
-                    style::SetColors(style::Colors::new(q.color[i].0.into(), q.color[i].1.into())),
-                    style::Print(c)
-                ).expect("Draw Error");
-            }
-        }
+        // let row: Element = Row::new().into();
+        // eprintln!("{:?}", row);
+        // eprintln!("^ EMPTY ROW ^");
+        //
+        // let column: Element = Column::new().into();
+        // eprintln!("{:?}", column);
+        // eprintln!("^ EMPTY COLUMN ^");
+        //
+        // let row = Row::new().push(Text::new("Text in Row"));
+        // eprintln!("{:?}", Element::from(row));
+        // eprintln!("^ TEXT IN ROW ^");
+        //
+        // let column = Column::new().push(Text::new("Text in Column"));
+        // eprintln!("{:?}", Element::from(column));
+        // eprintln!("^ TEXT IN COLUMN ^");
+        //
+        // let row1 = Row::new()
+        //     .push(Text::new("Row 1 Item 1"))
+        //     .push(Text::new("Row 1 Item 2"));
+        // let row2 = Row::new()
+        //     .push(Text::new("Row 2 Item 1"))
+        //     .push(Text::new("Row 2 Item 2"));
+        // let column = Column::new().push(row1).push(row2);
+        // eprintln!("{:?}", Element::from(column));
+        // eprintln!("^ ROW IN TEXT IN COLUMN X2 ^");
+        assert!(false);
     }
 }
-
-/// This is just for testing
-pub fn clear(stdout: &mut Stdout) {
-    queue!(stdout, terminal::Clear(terminal::ClearType::All)).expect("Clear disn't work");
-}
-
-
